@@ -57,8 +57,12 @@ public class CongestionTaxCalculator {
         if (IsTollFreeDate(date) || IsTollFreeVehicle(vehicle))
             return 0;
         String hour = date.getHours() + ":" + date.getMinutes();
-        return taxPrice.getTimings().stream().filter(obj -> obj.isTimeBetween(hour)).findFirst()
-                .orElse(new CostTiming()).getPrice();
+        return taxPrice.getTimings()
+                .stream()
+                .filter(obj -> obj.isTimeBetween(hour))
+                .findFirst()
+                .orElse(new CostTiming())
+                .getPrice();
     }
 
     private Boolean IsTollFreeDate(Date date) {
